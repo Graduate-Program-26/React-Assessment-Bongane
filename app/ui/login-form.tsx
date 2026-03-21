@@ -33,7 +33,12 @@ export default function LoginForm() {
             Login
           </button>
         </form>
-        <button className="w-full border rounded-md mt-5 p-2 justify-items-center cursor-pointer" onClick={() => signIn()}>Login with github</button>
+        <button
+          className="w-full border rounded-md mt-5 p-2 justify-items-center cursor-pointer hover:bg-[#294bd6]"
+          onClick={() => signIn()}
+        >
+          Login with github
+        </button>
       </div>
     </div>
   );
