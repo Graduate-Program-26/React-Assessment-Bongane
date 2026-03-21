@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { oAuthProxy } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 import { Pool } from "pg";
 
 export const auth = betterAuth({
@@ -11,6 +11,9 @@ export const auth = betterAuth({
   }),
   session: {
     expiresIn: 60 * 30, //  Logged on for 30 minutes
+    cookieCache: {
+      enabled: true,
+    },
   },
   socialProviders: {
     github: {
@@ -18,4 +21,5 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     },
   },
+  plugins: [nextCookies()],
 });

@@ -1,10 +1,16 @@
 "use client";
-import { authClient, signOut } from "../lib/auth-client";
-import darkModeBackground from "../../public/dark-mode-background.jpg";
 
-export default function DashboardPage() {
-  const session = authClient.useSession.get();
-  console.log(session.data);
+import { redirect } from "next/navigation";
+import darkModeBackground from "../../public/dark-mode-background.jpg";
+import { signOut } from "../lib/actions/auth-actions";
+import { auth } from "../lib/auth";
+
+export default async function DashboardPage() {
+  const session = await auth.api.getSession();
+  if (!session) {
+    redirect("/");
+  }
+
   return (
     <main className="text-white">
       <div

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { signIn } from "../lib/actions/auth-actions";
 
 export default function Navbar() {
   return (
@@ -14,19 +14,13 @@ export default function Navbar() {
               placeholder="Search username"
             />
             <div className="flex justify-end gap-5">
-              <Link
-                href="/login"
-                className="py-2 px-3 border rounded-md border-white/10 hover:bg-[#171717]  cursor-pointer"
-              >
-                Log In
-              </Link>
               <button
-                type="button"
+                onClick={signIn}
                 className="py-2 px-3 border rounded-md border-white/10
              bg-gradient-to-r from-[#7b9fe8] to-[#294bd6]
              hover:from-[#294bd6] hover:to-[#171717] cursor-pointer"
               >
-                Create New Account
+                Log In
               </button>
             </div>
           </div>
