@@ -10,7 +10,7 @@ export const auth = betterAuth({
     },
   }),
   session: {
-    expiresIn: 20, // 7 days in seconds
+    expiresIn: 60 * 30, //  Logged on for 30 minutes
   },
   socialProviders: {
     github: {
