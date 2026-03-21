@@ -9,7 +9,7 @@ import { lusitana } from "@/app/ui/fonts";
 // import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "./button";
 import { useSearchParams } from "next/navigation";
-import { authClient } from "../lib/auth-client";
+import { authClient, signIn } from "../lib/auth-client";
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
@@ -66,14 +66,7 @@ export default function LoginForm() {
         {/* </div> */}
         {/* </div>  */}
       </div>
-      <Button
-        className="mt-4 w-full"
-        onClick={() =>
-          authClient.signIn.social({
-            provider: "github",
-          })
-        }
-      >
+      <Button className="mt-4 w-full" onClick={signIn}>
         Sign in with Github
         {/* <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" /> */}
       </Button>

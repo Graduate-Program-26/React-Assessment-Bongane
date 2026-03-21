@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { oAuthProxy } from "better-auth/plugins";
 import { Pool } from "pg";
 
 export const auth = betterAuth({
@@ -8,13 +9,13 @@ export const auth = betterAuth({
       rejectUnauthorized: false,
     },
   }),
+  session: {
+    expiresIn: 20, // 7 days in seconds
+  },
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     },
   },
-  // session : {
-  //   freshAge: 60 * 5,
-  // }
 });
