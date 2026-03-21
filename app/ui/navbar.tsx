@@ -14,8 +14,17 @@ export default function Navbar() {
               placeholder="Search username"
             />
             <div className="flex justify-end gap-5">
-              <button>Sign In</button>
-              <button>Sign Up</button>
+              <button type="button" className="py-2 px-3 border rounded-md border-white/10 hover:bg-[#171717]  cursor-pointer">
+                Sign In
+              </button>
+              <button
+                type="button"
+                className="py-2 px-3 border rounded-md border-white/10
+             bg-gradient-to-r from-[#7b9fe8] to-[#294bd6]
+             hover:from-[#294bd6] hover:to-[#171717] cursor-pointer"
+              >
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
