@@ -22,3 +22,13 @@ export async function signOut() {
   });
   redirect("/");
 }
+
+export async function getSession() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (!session) {
+    redirect("/");
+  }
+  return session;
+}
