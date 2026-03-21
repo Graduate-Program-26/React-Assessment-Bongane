@@ -3,16 +3,16 @@
 import LoginForm from "@/app/ui/login-form";
 import Navbar from "@/app/ui/navbar";
 import { Suspense } from "react";
+import darkModeBackground from "../../../public/dark-mode-background.jpg";
 
 export default function LoginPage() {
   return (
-    <main className="">
-      <Navbar />
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-        <div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36"></div>
-        <Suspense>
-          <LoginForm />
-        </Suspense>
+    <main className="text-white">
+      <div
+        className="h-screen w-screen bg-cover bg-center"
+        style={{ backgroundImage: `url(${darkModeBackground.src})` }}
+      >
+        <LoginForm />
       </div>
     </main>
   );
