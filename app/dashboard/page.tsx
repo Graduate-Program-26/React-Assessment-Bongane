@@ -5,7 +5,7 @@ import { signOut } from "../lib/actions/auth-actions";
 import { useSession } from "../lib/hooks";
 
 export default function DashboardPage() {
-  const session = useSession()
+  const session = useSession();
   console.log(session);
   return (
     <main className="text-white">
