@@ -16,10 +16,29 @@ import { useDisclosure } from "@mantine/hooks";
 import { FaGitAlt } from "react-icons/fa";
 import classes from "./styles/Navbar.module.scss";
 import { signIn } from "../lib/actions/auth-actions";
+import { SessionContext } from "../lib/session-context";
+import { useContext } from "react";
 
-export default function Navbar() {
+interface NavbarProps {
+  showAuth: boolean;
+}
+export default function Navbar({ showAuth }: NavbarProps) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+  const session = useContext(SessionContext);
+  console.log(session);
+
+  const loggedInButton = showAuth ? (
+    <Button
+      variant="gradient"
+      gradient={{ from: "#7b9fe8", to: "#294bd6" }}
+      onClick={signIn}
+    >
+      Log in
+    </Button>
+  ) : (
+    <></>
+  );
 
   return (
     <Box
@@ -50,15 +69,7 @@ export default function Navbar() {
             mx="md"
           />
 
-          <Group visibleFrom="sm">
-            <Button
-              variant="gradient"
-              gradient={{ from: "#7b9fe8", to: "#294bd6" }}
-              onClick={signIn}
-            >
-              Log in
-            </Button>
-          </Group>
+          <Group visibleFrom="sm">{loggedInButton}</Group>
 
           <Burger
             opened={drawerOpened}
