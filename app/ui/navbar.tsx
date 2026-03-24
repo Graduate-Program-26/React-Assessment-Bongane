@@ -16,7 +16,6 @@ import { useDisclosure } from "@mantine/hooks";
 import { FaGitAlt } from "react-icons/fa";
 import classes from "./styles/Navbar.module.scss";
 import { signIn } from "../lib/actions/auth-actions";
-import { SessionContext } from "../lib/session-context";
 import { useContext } from "react";
 
 interface NavbarProps {
@@ -25,8 +24,6 @@ interface NavbarProps {
 export default function Navbar({ showAuth }: NavbarProps) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-  const session = useContext(SessionContext);
-  console.log(session);
 
   const loggedInButton = showAuth ? (
     <Button

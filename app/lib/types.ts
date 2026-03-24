@@ -1,3 +1,13 @@
+export type UserData = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  email: string;
+  emailVerified: boolean;
+  name: string;
+  image?: string | null | undefined;
+};
+
 export type SessionData = {
   session: {
     id: string;
@@ -9,13 +19,5 @@ export type SessionData = {
     ipAddress?: string | null | undefined;
     userAgent?: string | null | undefined;
   };
-  user: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    email: string;
-    emailVerified: boolean;
-    name: string;
-    image?: string | null | undefined;
-  };
+  user: UserData;
 };

@@ -23,7 +23,7 @@ export default function RepoStats() {
   const descriptions = data.map((stat) => (
     <Box
       key={stat.label}
-      style={{ borderBottomColor: stat.color }}
+      style={{ borderBottomColor: stat.color, zIndex: 3 }}
       className={classes.stat}
     >
       <Text tt="uppercase" fz="xs" c="dimmed" fw={700}>
@@ -43,22 +43,17 @@ export default function RepoStats() {
     <Paper withBorder p="md" radius="md">
       <Group justify="space-between">
         <Group align="flex-end" gap="xs">
-          <Text fz="xl" fw={700}>
+          <Text fz="xl" fw={700} style={{ zIndex: 5 }}>
             345,765
           </Text>
           <Text c="teal" className={classes.diff} fz="sm" fw={700}>
             <span>18%</span>
-            <IconArrowUpRight
-              size={16}
-              style={{ marginBottom: 4 }}
-              stroke={1.5}
-            />
           </Text>
         </Group>
         <IconDeviceAnalytics size={22} className={classes.icon} stroke={1.5} />
       </Group>
 
-      <Text c="dimmed" fz="sm">
+      <Text fz="sm" style={{ zIndex: 5 }}>
         Page views compared to previous month
       </Text>
 
@@ -66,6 +61,7 @@ export default function RepoStats() {
         size={34}
         classNames={{ label: classes.progressLabel }}
         mt={40}
+        style={{ zIndex: 5 }}
       >
         {segments}
       </Progress.Root>

@@ -1,13 +1,19 @@
 "use client";
 
-import { Overlay, Grid, Container, SimpleGrid } from "@mantine/core";
+import { Overlay, Grid, Container, Text, Timeline } from "@mantine/core";
 import classes from "./styles/Dashboard.module.scss";
 import { signOut } from "../lib/actions/auth-actions";
 import AvatarCard from "./avatar-card";
 
 import RepoStats from "./repo-stats";
+import { IconMessageDots } from "@tabler/icons-react";
+import { SessionData, UserData } from "../lib/types";
 
-export default function DashboardLayout() {
+interface DashboardLayoutProps {
+  user: UserData;
+}
+
+export default function DashboardLayout({ user }: DashboardLayoutProps) {
   return (
     <div className={classes.wrapper}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />
@@ -40,7 +46,48 @@ export default function DashboardLayout() {
           </Grid.Col>
         </Grid>
       </Container>
-      <Container></Container>
+      <Container px={10} mt={50} size="xs" style={{ zIndex: 5 }}>
+        <Timeline
+          color="grape"
+          radius="md"
+          active={3}
+          lineWidth={3}
+          bulletSize={22}
+          align="left"
+          style={{ zIndex: 5 }}
+        >
+          <Timeline.Item
+            title="Code review"
+            bullet={<IconMessageDots size={12} />}
+            style={{ zIndex: 5 }}
+          >
+            <Text size="sm">
+              <Text variant="link" component="span" inherit>
+                Robert Gluesticker
+              </Text>{" "}
+              left a code review on your pull request
+            </Text>
+            <Text size="xs" mt={4}>
+              12 minutes ago
+            </Text>
+          </Timeline.Item>
+          <Timeline.Item
+            title="Code review"
+            bullet={<IconMessageDots size={12} />}
+            style={{ zIndex: 5 }}
+          >
+            <Text size="sm">
+              <Text variant="link" component="span" inherit>
+                Robert Gluesticker
+              </Text>{" "}
+              left a code review on your pull request
+            </Text>
+            <Text size="xs" mt={4}>
+              12 minutes ago
+            </Text>
+          </Timeline.Item>
+        </Timeline>
+      </Container>
 
       <div className={classes.inner}>
         <div className="h-screen w-screen bg-cover bg-center">
