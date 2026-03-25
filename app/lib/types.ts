@@ -21,3 +21,15 @@ export type SessionData = {
   };
   user: UserData;
 };
+
+export type RepoWithLanguages = {
+  repo: {
+    description: string | null;
+    full_name: string;
+    stargazers_count: number;
+    visibility: string;
+    updated_at: string;
+    languages_url: string;
+  };
+  languages: Record<string, number>;
+};

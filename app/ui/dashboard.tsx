@@ -7,15 +7,17 @@ import AvatarCard from "./avatar-card";
 
 import RepoStats from "./repo-stats";
 import { IconMessageDots } from "@tabler/icons-react";
-import { SessionData, UserData } from "../lib/types";
+import { RepoWithLanguages, SessionData, UserData } from "../lib/types";
 import { useSession } from "../lib/hooks";
 import { GithubUser } from "../lib/github/schemas/user.schema";
+import { GithubRepository } from "../lib/github/schemas/repos.schema";
 
 interface DashboardLayoutProps {
   user: GithubUser;
+  repos: RepoWithLanguages[];
 }
 
-export default function DashboardLayout({ user }: DashboardLayoutProps) {
+export default function DashboardLayout({ user, repos }: DashboardLayoutProps) {
   const session = useSession();
 
   console.log(session.session?.user);
@@ -30,24 +32,12 @@ export default function DashboardLayout({ user }: DashboardLayoutProps) {
           </Grid.Col>
           <Grid.Col span={{ xs: 12, md: 8 }}>
             <Grid>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
-              <Grid.Col span={{ xs: 12, md: 4 }}>
-                <RepoStats />
-              </Grid.Col>
+              {repos.map((repo) => (
+                <Grid.Col span={{ xs: 12, md: 4 }}>
+                  {" "}
+                  <RepoStats repo={repo} />
+                </Grid.Col>
+              ))}
             </Grid>
           </Grid.Col>
         </Grid>

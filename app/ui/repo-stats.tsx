@@ -1,22 +1,28 @@
 import { IconArrowUpRight, IconDeviceAnalytics } from "@tabler/icons-react";
 import { Box, Group, Paper, Progress, SimpleGrid, Text } from "@mantine/core";
 import classes from "./styles/RepoStats.module.scss";
+import { GithubRepository } from "../lib/github/schemas/repos.schema";
+import { RepoWithLanguages } from "../lib/types";
 
 const data = [
-  { label: "Mobile", count: "204,001", part: 59, color: "#47d6ab" },
+  { language: "Mobile", numberOfLines: "204,001", part: 59, color: "#47d6ab" },
   { label: "Desktop", count: "121,017", part: 35, color: "#03141a" },
   { label: "Tablet", count: "31,118", part: 6, color: "#4fcdf7" },
 ];
 
-export default function RepoStats() {
-  const segments = data.map((segment) => (
+interface RepoStatsProps {
+  repo: RepoWithLanguages;
+}
+
+export default function RepoStats({ repo }: RepoStatsProps) {
+  const segments = Object.entries(repo.languages).map(([language, bytes]) => (
     <Progress.Section
-      value={segment.part}
-      color={segment.color}
-      key={segment.color}
-      aria-label={segment.label}
+      value={bytes}
+      //   color={segment.color}
+      key={language}
+      aria-label={language}
     >
-      {segment.part > 10 && <Progress.Label>{segment.part}%</Progress.Label>}
+      {bytes > 10 && <Progress.Label>{bytes}%</Progress.Label>}
     </Progress.Section>
   ));
 
@@ -44,17 +50,13 @@ export default function RepoStats() {
       <Group justify="space-between">
         <Group align="flex-end" gap="xs">
           <Text fz="xl" fw={700} style={{ zIndex: 5 }}>
-            345,765
-          </Text>
-          <Text c="teal" className={classes.diff} fz="sm" fw={700}>
-            <span>18%</span>
+            {repo.repo.full_name}
           </Text>
         </Group>
-        <IconDeviceAnalytics size={22} className={classes.icon} stroke={1.5} />
       </Group>
 
       <Text fz="sm" style={{ zIndex: 5 }}>
-        Page views compared to previous month
+        {repo.repo.description || "Empty description"}
       </Text>
 
       <Progress.Root
