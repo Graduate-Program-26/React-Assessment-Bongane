@@ -2,25 +2,31 @@
 
 import { Overlay, Grid, Container, Text, Timeline } from "@mantine/core";
 import classes from "./styles/Dashboard.module.scss";
-import { signOut } from "../lib/actions/auth-actions";
+import { getSession, signOut } from "../lib/actions/auth-actions";
 import AvatarCard from "./avatar-card";
 
 import RepoStats from "./repo-stats";
 import { IconMessageDots } from "@tabler/icons-react";
 import { SessionData, UserData } from "../lib/types";
+import { useSession } from "../lib/hooks";
+import { GithubUser } from "../lib/github/schemas/user.schema";
 
 interface DashboardLayoutProps {
-  user: UserData;
+  user: GithubUser;
 }
 
 export default function DashboardLayout({ user }: DashboardLayoutProps) {
+  const session = useSession();
+
+  console.log(session.session?.user);
+  console.log(user);
   return (
     <div className={classes.wrapper}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />
       <Container my="md">
         <Grid>
           <Grid.Col span={{ xs: 12, md: 4 }}>
-            <AvatarCard />
+            <AvatarCard user={user} />
           </Grid.Col>
           <Grid.Col span={{ xs: 12, md: 8 }}>
             <Grid>

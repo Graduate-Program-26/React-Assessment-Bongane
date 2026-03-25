@@ -32,3 +32,18 @@ export async function getSession() {
   }
   return session;
 }
+
+export async function getToken(): Promise<string> {
+  const tokenResponse = await auth.api.getAccessToken({
+    body: {
+      providerId: "github",
+    },
+    headers: await headers(),
+  });
+
+  if (!tokenResponse?.accessToken) {
+    throw new Error("No access token found (user not authenticated)");
+  }
+
+  return tokenResponse.accessToken;
+}
