@@ -9,10 +9,13 @@ interface RepoStatsProps {
 
 export default function RepoStats({ repo }: RepoStatsProps) {
   console.log(ghColors.JavaScript);
-  const totalBytes = Object.entries(repo.languages).reduce((prev :  number, acc: [string, number]) => {
-    const total = prev + acc[1];
-    return total;
-  }, 0);
+  const totalBytes = Object.entries(repo.languages).reduce(
+    (prev: number, acc: [string, number]) => {
+      const total = prev + acc[1];
+      return total;
+    },
+    0,
+  );
 
   console.log(totalBytes);
   const segments = Object.entries(repo.languages).map(([language, bytes]) => (
@@ -22,29 +25,38 @@ export default function RepoStats({ repo }: RepoStatsProps) {
       key={language}
       aria-label={language}
     >
-      {bytes > 10 && <Progress.Label>{(bytes/totalBytes * 100).toFixed(0)}%</Progress.Label>}
+      {bytes > 10 && (
+        <Progress.Label>
+          {((bytes / totalBytes) * 100).toFixed(0)}%
+        </Progress.Label>
+      )}
     </Progress.Section>
   ));
 
-  const descriptions = Object.entries(repo.languages).map(([language, bytes]) => (
-    <Box
-      key={language}
-      style={{ borderBottomColor: ghColors[language], zIndex: 3 }}
-      className={classes.stat}
-    >
-      <Text tt="uppercase" fz="xs" c="dimmed" fw={700}>
-        {language}
-      </Text>
-
-      <Group justify="space-between" align="flex-end" gap={0}>
-        <Text 
-        c={ghColors[language]} 
-        fw={700} size="sm" className={classes.statCount}>
-          {((bytes/totalBytes) * 100).toFixed(0)}%
+  const descriptions = Object.entries(repo.languages).map(
+    ([language, bytes]) => (
+      <Box
+        key={language}
+        style={{ borderBottomColor: ghColors[language], zIndex: 3 }}
+        className={classes.stat}
+      >
+        <Text tt="uppercase" fz="xs" c="dimmed" fw={700}>
+          {language}
         </Text>
-      </Group>
-    </Box>
-  ));
+
+        <Group justify="space-between" align="flex-end" gap={0}>
+          <Text
+            c={ghColors[language]}
+            fw={700}
+            size="sm"
+            className={classes.statCount}
+          >
+            {((bytes / totalBytes) * 100).toFixed(0)}%
+          </Text>
+        </Group>
+      </Box>
+    ),
+  );
 
   return (
     <Paper withBorder p="md" radius="md">
