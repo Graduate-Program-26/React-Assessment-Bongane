@@ -1,16 +1,34 @@
+"use client";
+
+import { Container, Overlay, Title, Text } from "@mantine/core";
+import classes from "./styles/HeroSection.module.scss";
+
 export default function HeroSection() {
   return (
-    <div className="flex flex-col items-center mt-6 lg:mt-20">
-      <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center">
-        Optimize Your{" "}
-        <span className="bg-gradient-to-r from-[#7b9fe8] to-[#294bd6] text-transparent bg-clip-text">
-          Workflow
-        </span>
-      </h1>
-      <p>
-        Track Repositories, Manage Pull Requests and Vusualize Activity in One
-        Powerful Interface
-      </p>
-    </div>
+    <>
+      <div className={classes.wrapper}>
+        <Overlay color="#000" opacity={0.65} zIndex={1} />
+
+        <div className={classes.inner}>
+          <Title className={classes.title}>
+            Optimize Your{" "}
+            <Text
+              size="xl"
+              variant="gradient"
+              gradient={{ from: "#7b9fe8", to: "#294bd6", deg: 90 }}
+            >
+              Workflow
+            </Text>
+          </Title>
+
+          <Container size={640}>
+            <Text size="lg" className={classes.description}>
+              Track Repositories, Manage Pull Requests and Vusualize Activity in
+              One Powerful Interface
+            </Text>
+          </Container>
+        </div>
+      </div>
+    </>
   );
 }
