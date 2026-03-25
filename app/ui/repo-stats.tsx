@@ -1,45 +1,46 @@
-import { IconArrowUpRight, IconDeviceAnalytics } from "@tabler/icons-react";
 import { Box, Group, Paper, Progress, SimpleGrid, Text } from "@mantine/core";
 import classes from "./styles/RepoStats.module.scss";
-import { GithubRepository } from "../lib/github/schemas/repos.schema";
 import { RepoWithLanguages } from "../lib/types";
-
-const data = [
-  { language: "Mobile", numberOfLines: "204,001", part: 59, color: "#47d6ab" },
-  { label: "Desktop", count: "121,017", part: 35, color: "#03141a" },
-  { label: "Tablet", count: "31,118", part: 6, color: "#4fcdf7" },
-];
+import { ghColors } from "../utils/languageColors";
 
 interface RepoStatsProps {
   repo: RepoWithLanguages;
 }
 
 export default function RepoStats({ repo }: RepoStatsProps) {
+  console.log(ghColors.JavaScript);
+  const totalBytes = Object.entries(repo.languages).reduce((prev :  number, acc: [string, number]) => {
+    const total = prev + acc[1];
+    return total;
+  }, 0);
+
+  console.log(totalBytes);
   const segments = Object.entries(repo.languages).map(([language, bytes]) => (
     <Progress.Section
       value={bytes}
-      //   color={segment.color}
+      color={ghColors[language]}
       key={language}
       aria-label={language}
     >
-      {bytes > 10 && <Progress.Label>{bytes}%</Progress.Label>}
+      {bytes > 10 && <Progress.Label>{(bytes/totalBytes * 100).toFixed(0)}%</Progress.Label>}
     </Progress.Section>
   ));
 
-  const descriptions = data.map((stat) => (
+  const descriptions = Object.entries(repo.languages).map(([language, bytes]) => (
     <Box
-      key={stat.label}
-      style={{ borderBottomColor: stat.color, zIndex: 3 }}
+      key={language}
+      style={{ borderBottomColor: ghColors[language], zIndex: 3 }}
       className={classes.stat}
     >
       <Text tt="uppercase" fz="xs" c="dimmed" fw={700}>
-        {stat.label}
+        {language}
       </Text>
 
       <Group justify="space-between" align="flex-end" gap={0}>
-        <Text fw={700}>{stat.count}</Text>
-        <Text c={stat.color} fw={700} size="sm" className={classes.statCount}>
-          {stat.part}%
+        <Text 
+        c={ghColors[language]} 
+        fw={700} size="sm" className={classes.statCount}>
+          {((bytes/totalBytes) * 100).toFixed(0)}%
         </Text>
       </Group>
     </Box>

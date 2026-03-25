@@ -33,7 +33,7 @@ export default function DashboardLayout({ user, repos }: DashboardLayoutProps) {
           <Grid.Col span={{ xs: 12, md: 8 }}>
             <Grid>
               {repos.map((repo) => (
-                <Grid.Col span={{ xs: 12, md: 4 }}>
+                <Grid.Col span={{ xs: 12, md: 6 }}>
                   {" "}
                   <RepoStats repo={repo} />
                 </Grid.Col>
