@@ -1,4 +1,12 @@
-import { GitHubEvent } from "../schemas/events.schema";
+import {
+  CreateEventPayload,
+  DeleteEventPayload,
+  GitHubEvent,
+  PullRequestPayload,
+  PullRequestReviewCommentPayload,
+  PullRequestReviewPayload,
+  PushPayload,
+} from "../schemas/events.schema";
 import { Timeline, Text } from "@mantine/core";
 
 function eventType(event: GitHubEvent) {
@@ -8,17 +16,19 @@ function eventType(event: GitHubEvent) {
         break;
       }
       case "CreateEvent": {
+        const createEventPayload = event.payload as CreateEventPayload;
+
         return (
           <Timeline.Item
-            title="Delete"
+            title="Create"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={createEventPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {createEventPayload.sender}
               </Text>{" "}
-              created {event.payload.ref_type}: {event.payload.ref}:
+              created {createEventPayload.ref_type}: {createEventPayload.ref}:
             </Text>
             <Text size="xs" mt={4}>
               at {event.created_at.toDateString()}
@@ -27,17 +37,18 @@ function eventType(event: GitHubEvent) {
         );
       }
       case "DeleteEvent": {
+        const deleteEventPayload = event.payload as DeleteEventPayload;
         return (
           <Timeline.Item
             title="Delete"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={deleteEventPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {deleteEventPayload.sender}
               </Text>{" "}
-              deleted {event.payload.ref_type}: {event.payload.ref}:
+              deleted {deleteEventPayload.ref_type}: {deleteEventPayload.ref}:
             </Text>
             <Text size="xs" mt={4}>
               at {event.created_at.toDateString()}
@@ -67,18 +78,20 @@ function eventType(event: GitHubEvent) {
         break;
       }
       case "PullRequestEvent": {
+        const pullRequestPayload = event.payload as PullRequestPayload;
         return (
           <Timeline.Item
             title="Pull request"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={pullRequestPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {pullRequestPayload.sender}
               </Text>{" "}
-              {event.payload.action} from {event.payload.pull_request.head.ref}{" "}
-              to {event.payload.pull_request.base.ref}:
+              {pullRequestPayload.action} from{" "}
+              {pullRequestPayload.pull_request.head.ref} to{" "}
+              {pullRequestPayload.pull_request.base.ref}:
             </Text>
             <Text size="xs" mt={4}>
               created at {event.created_at.toDateString()}
@@ -87,22 +100,21 @@ function eventType(event: GitHubEvent) {
         );
       }
       case "PullRequestReviewEvent": {
-        const pullRequestReview = event.payload.pull_request as {
-          head: { ref: string };
-          base: { ref: string };
-        };
+        const pullRequestReviewPayload =
+          event.payload as PullRequestReviewPayload;
         return (
           <Timeline.Item
             title="Pull request review"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={pullRequestReviewPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {pullRequestReviewPayload.sender}
               </Text>{" "}
-              {event.payload.action} for the pull request{" "}
-              {pullRequestReview.head.ref} to {pullRequestReview.base.ref}:
+              {pullRequestReviewPayload.action} for the pull request{" "}
+              {pullRequestReviewPayload.pull_request.head.ref} to{" "}
+              {pullRequestReviewPayload.pull_request.base.ref}:
             </Text>
             <Text size="xs" mt={4}>
               created at {event.created_at.toDateString()}
@@ -111,22 +123,22 @@ function eventType(event: GitHubEvent) {
         );
       }
       case "PullRequestReviewCommentEvent": {
-        const pullRequestReviewComment = event.payload.pull_request as {
-          head: { ref: string };
-          base: { ref: string };
-        };
+        const pullRequestReviewCommentPayload =
+          event.payload as PullRequestReviewCommentPayload;
         return (
           <Timeline.Item
             title="Pull request comment"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={pullRequestReviewCommentPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {pullRequestReviewCommentPayload.sender}
               </Text>{" "}
-              {event.payload.action} on {pullRequestReviewComment.head.ref} to{" "}
-              {pullRequestReviewComment.base.ref} pull request:
+              {pullRequestReviewCommentPayload.action} on{" "}
+              {pullRequestReviewCommentPayload.pull_request.head.ref} to{" "}
+              {pullRequestReviewCommentPayload.pull_request.base.ref} pull
+              request:
             </Text>
             <Text size="xs" mt={4}>
               created at {event.created_at.toDateString()}
@@ -135,17 +147,18 @@ function eventType(event: GitHubEvent) {
         );
       }
       case "PushEvent": {
+        const pushPayload = event.payload as PushPayload;
         return (
           <Timeline.Item
             title="Push"
             style={{ zIndex: 5 }}
-            key={event.payload.id}
+            key={pushPayload.id}
           >
             <Text size="sm">
               <Text variant="link" component="span" inherit>
-                {event.payload.sender}
+                {pushPayload.sender}
               </Text>{" "}
-              pushed to {event.payload.ref}
+              pushed to {pushPayload.ref}
             </Text>
             <Text size="xs" mt={4}>
               created at {event.created_at.toDateString()}
