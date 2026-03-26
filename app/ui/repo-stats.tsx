@@ -8,7 +8,6 @@ interface RepoStatsProps {
 }
 
 export default function RepoStats({ repo }: RepoStatsProps) {
-  console.log(ghColors.JavaScript);
   const totalBytes = Object.entries(repo.languages).reduce(
     (prev: number, acc: [string, number]) => {
       const total = prev + acc[1];
@@ -17,7 +16,6 @@ export default function RepoStats({ repo }: RepoStatsProps) {
     0,
   );
 
-  console.log(totalBytes);
   const segments = Object.entries(repo.languages).map(([language, bytes]) => (
     <Progress.Section
       value={bytes}

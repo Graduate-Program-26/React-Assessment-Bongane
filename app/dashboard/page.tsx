@@ -13,6 +13,10 @@ import {
   GitHubLanguages,
   GithubLanguagesSchema,
 } from "../lib/github/schemas/languages.schema";
+import {
+  GitHubEvent,
+  GithubEventsSchema,
+} from "../lib/github/schemas/events.schema";
 
 async function getAuthenticatedUser(): Promise<GithubUser> {
   const token = await getToken();
@@ -77,6 +81,28 @@ async function getRepositoryLanguages(
   return GithubLanguagesSchema.parse(data);
 }
 
+export async function getEvents(username: string): Promise<GitHubEvent[]> {
+  const token = await getToken();
+  const response = await fetch(
+    `https://api.github.com/users/${username}/events`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Github-Api-Version": "2026-03-10",
+        Accept: "application/vnd.github+json",
+      },
+    },
+  );
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw Error(`Github Api Error: ${response.status}-${error}`);
+  }
+
+  const data = await response.json();
+  return GithubEventsSchema.parse(data);
+}
+
 export default async function DashboardPage() {
   const authenticatedUser = await getAuthenticatedUser();
   const session = await getSession();
@@ -87,11 +113,16 @@ export default async function DashboardPage() {
       return { repo, languages };
     }),
   );
+  const userEvents = await getEvents(session.user.name);
 
   return (
     <main className="h-screen text-white">
       <Navbar showAuth={false} />
-      <DashboardLayout user={authenticatedUser} repos={repoAndLanguages} />
+      <DashboardLayout
+        user={authenticatedUser}
+        repos={repoAndLanguages}
+        activites={userEvents}
+      />
     </main>
   );
 }

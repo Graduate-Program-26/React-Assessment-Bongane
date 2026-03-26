@@ -33,3 +33,7 @@ export type RepoWithLanguages = {
   };
   languages: Record<string, number>;
 };
+
+export type Activity = {
+  payload: {};
+};

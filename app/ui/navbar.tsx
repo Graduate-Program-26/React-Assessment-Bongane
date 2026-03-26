@@ -15,7 +15,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { FaGitAlt } from "react-icons/fa";
 import classes from "./styles/Navbar.module.scss";
-import { signIn } from "../lib/actions/auth-actions";
+import { signIn, signOut } from "../lib/actions/auth-actions";
 import { useContext } from "react";
 
 interface NavbarProps {
@@ -34,7 +34,22 @@ export default function Navbar({ showAuth }: NavbarProps) {
       Log in
     </Button>
   ) : (
-    <></>
+    <button
+      className="border rounded-md p-2 cursor-pointer hover:bg-[#294bd6]"
+      onClick={signOut}
+    >
+      Sign out
+    </button>
+  );
+
+  const sideBarLogginButton = showAuth ? (
+    <Button variant="default" onClick={signIn}>
+      Log in
+    </Button>
+  ) : (
+    <Button variant="default" onClick={signOut}>
+      Log out
+    </Button>
   );
 
   return (
@@ -96,20 +111,10 @@ export default function Navbar({ showAuth }: NavbarProps) {
             mb="md"
           />
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
-
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
+            {sideBarLogginButton}
           </Group>
         </ScrollArea>
       </Drawer>
