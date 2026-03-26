@@ -4,6 +4,7 @@ import Navbar from "../ui/navbar";
 import {
   GithubUser,
   GithubUserSchema,
+  GithubUsersSchema,
 } from "../lib/github/schemas/user.schema";
 import {
   GithubRepository,
@@ -17,6 +18,10 @@ import {
   GitHubEvent,
   GithubEventsSchema,
 } from "../lib/github/schemas/events.schema";
+import {
+  GithubUserResult,
+  GithubUserResultsSchema,
+} from "../lib/github/schemas/userResult.schema";
 
 async function getAuthenticatedUser(): Promise<GithubUser> {
   const token = await getToken();
@@ -103,7 +108,35 @@ export async function getEvents(username: string): Promise<GitHubEvent[]> {
   return GithubEventsSchema.parse(data);
 }
 
-export default async function DashboardPage() {
+async function searchGitHubUsers(query: string): Promise<GithubUserResult[]> {
+  const token = await getToken();
+  const response = await fetch(
+    `https://api.github.com/search/users?q=${encodeURIComponent(query)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Github-Api-Version": "2026-03-10",
+        Accept: "application/vnd.github+json",
+      },
+    },
+  );
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw Error(`Github Api Error: ${response.status}-${error}`);
+  }
+
+  const data = await response.json();
+  const emptyResults: GithubUserResult[] = [];
+  return GithubUserResultsSchema.parse(data.items) ?? emptyResults;
+}
+
+export default async function DashboardPage(props: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}) {
   const authenticatedUser = await getAuthenticatedUser();
   const session = await getSession();
   const userRepoitories = await getRepositories(session.user.name);
@@ -115,9 +148,15 @@ export default async function DashboardPage() {
   );
   const userEvents = await getEvents(session.user.name);
 
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || "";
+  let users: GithubUserResult[] = [];
+  if (query.length > 2) {
+    users = await searchGitHubUsers(query);
+  }
   return (
     <main className="h-screen text-white">
-      <Navbar showAuth={false} />
+      <Navbar showAuth={false} showSearch={true} query={query} users={users} />
       <DashboardLayout
         user={authenticatedUser}
         repos={repoAndLanguages}

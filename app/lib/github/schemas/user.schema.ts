@@ -11,4 +11,6 @@ export const GithubUserSchema = z.object({
   public_repos: z.number(),
 });
 
+export const GithubUsersSchema = z.array(GithubUserSchema);
+
 export type GithubUser = z.infer<typeof GithubUserSchema>;
