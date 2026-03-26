@@ -4,7 +4,7 @@ This document outlines the key technologies, APIs, and patterns used in this pro
 
 ---
 
-# 🧱 Tech Stack Overview
+# Tech Stack Overview
 
 * **Framework:** Next.js (App Router)
 * **UI Library:** Mantine
@@ -16,8 +16,14 @@ This document outlines the key technologies, APIs, and patterns used in this pro
 ---
 <img width="1701" height="960" alt="Screenshot 2026-03-26 at 17 39 09" src="https://github.com/user-attachments/assets/9a269b5d-857b-4ef7-a19a-d8bfe57d4d90" />
 
+# Light house performance
+## Live Link
+<img width="1306" height="1162" alt="Screenshot 2026-03-26 at 17 49 12" src="https://github.com/user-attachments/assets/4f3224d6-411c-452b-aa95-ed6fa9642758" />
 
-# 🎨 Mantine Setup
+## Local Link
+<img width="1306" height="1162" alt="Screenshot 2026-03-26 at 17 55 34" src="https://github.com/user-attachments/assets/bf2c4f67-2b5c-4517-b56b-05ae9d79c1a5" />
+
+# Mantine Setup
 
 ## Provider Configuration
 
@@ -52,7 +58,7 @@ Key features used:
 ---
 
 
-# 🎯 Tabler Icons
+# Tabler Icons
 
 Used for UI iconography.
 
@@ -68,14 +74,14 @@ import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
 ---
 
-# ⚙️ Package Management
+#  Package Management
 
 Project uses **pnpm**.
 
 
 ---
 
-# 📚 Key Documentation References
+# Key Documentation References
 
 * Next.js: [https://nextjs.org/docs/app](https://nextjs.org/docs/app)
 * Mantine: [https://mantine.dev/](https://mantine.dev/)
@@ -92,7 +98,7 @@ Project uses **pnpm**.
 * Github rest apis : [https://docs.github.com/en/rest]
 ---
 
-# 🚀 Summary
+# Summary
 
 This project is a dashboard-style application built using:
 
