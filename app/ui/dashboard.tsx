@@ -1,6 +1,6 @@
 "use client";
 
-import { Overlay, Grid, Container, Text, Timeline } from "@mantine/core";
+import { Overlay, Grid, Container, Text, Timeline, Title } from "@mantine/core";
 import classes from "./styles/Dashboard.module.scss";
 import { signOut } from "../lib/actions/auth-actions";
 import AvatarCard from "./avatar-card";
@@ -51,6 +51,7 @@ export default function DashboardLayout({
           </Grid.Col>
         </Grid>
       </Container>
+      <Title></Title>
       <Container px={10} mt={50} size="xs" style={{ zIndex: 5 }}>
         <Timeline
           color="grape"
