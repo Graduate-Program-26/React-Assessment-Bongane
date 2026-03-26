@@ -14,6 +14,7 @@ This document outlines the key technologies, APIs, and patterns used in this pro
 * **Package Manager:** pnpm
 
 ---
+<img width="1701" height="960" alt="Screenshot 2026-03-26 at 17 39 09" src="https://github.com/user-attachments/assets/9a269b5d-857b-4ef7-a19a-d8bfe57d4d90" />
 
 
 # 🎨 Mantine Setup
