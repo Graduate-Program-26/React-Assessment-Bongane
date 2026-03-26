@@ -17,6 +17,7 @@ import { useSession } from "../lib/hooks";
 import { GithubUser } from "../lib/github/schemas/user.schema";
 import { processEvents } from "../lib/github/actions/process-events";
 import { GitHubEvent } from "../lib/github/schemas/events.schema";
+import GithubCalendar from "./github-calendar";
 
 interface DashboardLayoutProps {
   user: GithubUser;
@@ -51,6 +52,7 @@ export default function DashboardLayout({
       </Container>
       <Title></Title>
       <Container px={10} mt={50} size="xs" style={{ zIndex: 5 }}>
+        <GithubCalendar />
         <Timeline
           color="grape"
           radius="md"
