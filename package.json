@@ -9,18 +9,49 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@mantine/carousel": "^8.3.18",
+    "@mantine/charts": "^8.3.18",
+    "@mantine/core": "^8.3.18",
+    "@mantine/hooks": "^8.3.18",
+    "@mantinex/mantine-logo": "^2.0.0",
+    "@octokit/core": "^7.0.6",
+    "@primer/octicons": "^19.23.1",
+    "@primer/octicons-react": "^19.23.1",
+    "@scdev/github-languages-colors": "^1.0.0",
+    "@tabler/icons-react": "^3.40.0",
+    "better-auth": "^1.5.5",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.20",
+    "github-calendar": "^2.3.4",
     "next": "16.1.7",
+    "pg": "^8.20.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-github-calendar": "^5.0.5",
+    "react-html-parser": "^2.0.2",
+    "react-icons": "^5.6.0",
+    "sass": "^1.98.0",
+    "use-debounce": "^10.1.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.18.0",
+    "@types/primer__octicons": "^19.21.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
+    "eslint-config-mantine": "^4.0.3",
     "eslint-config-next": "16.1.7",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "postcss": "^8.5.8",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.57.2"
   }
 }
