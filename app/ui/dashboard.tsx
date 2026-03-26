@@ -2,22 +2,15 @@
 
 import { Overlay, Grid, Container, Text, Timeline, Title } from "@mantine/core";
 import classes from "./styles/Dashboard.module.scss";
-import { signOut } from "../lib/actions/auth-actions";
 import AvatarCard from "./avatar-card";
 
 import RepoStats from "./repo-stats";
-import { IconMessageDots } from "@tabler/icons-react";
-import {
-  Activity,
-  RepoWithLanguages,
-  SessionData,
-  UserData,
-} from "../lib/types";
-import { useSession } from "../lib/hooks";
+import { RepoWithLanguages } from "../lib/types";
 import { GithubUser } from "../lib/github/schemas/user.schema";
 import { processEvents } from "../lib/github/actions/process-events";
 import { GitHubEvent } from "../lib/github/schemas/events.schema";
 import GithubCalendar from "./github-calendar";
+import ThemeToggle from "./theme-toggle";
 
 interface DashboardLayoutProps {
   user: GithubUser;
@@ -40,7 +33,7 @@ export default function DashboardLayout({
           </Grid.Col>
           <Grid.Col span={{ xs: 12, md: 8 }}>
             <Grid>
-              {repos.map((repo) => (
+              {repos.slice(0, 6).map((repo) => (
                 <Grid.Col span={{ xs: 12, md: 6 }}>
                   {" "}
                   <RepoStats repo={repo} />
@@ -50,6 +43,7 @@ export default function DashboardLayout({
           </Grid.Col>
         </Grid>
       </Container>
+
       <Title></Title>
       <Container px={10} mt={50} size="xs" style={{ zIndex: 5 }}>
         <GithubCalendar />
