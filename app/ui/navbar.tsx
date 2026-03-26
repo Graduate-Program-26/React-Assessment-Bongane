@@ -20,6 +20,7 @@ import { useContext } from "react";
 import SearchBox from "./search";
 import { GithubUser } from "../lib/github/schemas/user.schema";
 import { GithubUserResult } from "../lib/github/schemas/userResult.schema";
+import ThemeToggle from "./theme-toggle";
 
 interface NavbarProps {
   showAuth: boolean;
@@ -84,7 +85,10 @@ export default function Navbar({ showAuth, showSearch, users }: NavbarProps) {
 
           {searchBox}
 
-          <Group visibleFrom="sm">{loggedInButton}</Group>
+          <Group visibleFrom="sm">
+            {loggedInButton}
+            <ThemeToggle />
+          </Group>
 
           <Burger
             opened={drawerOpened}
@@ -107,7 +111,7 @@ export default function Navbar({ showAuth, showSearch, users }: NavbarProps) {
         <ScrollArea h="calc(100vh - 80px" mx="-md">
           <Divider my="sm" />
 
-          {searchBox}
+          <ThemeToggle />
 
           <Divider my="sm" />
 
