@@ -29,8 +29,6 @@ export default function DashboardLayout({
   repos,
   activites,
 }: DashboardLayoutProps) {
-  console.log(activites);
-
   return (
     <div className={classes.wrapper}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />

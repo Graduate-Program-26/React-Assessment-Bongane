@@ -61,6 +61,9 @@ importers:
       sass:
         specifier: ^1.98.0
         version: 1.98.0
+      use-debounce:
+        specifier: ^10.1.0
+        version: 10.1.0(react@19.2.3)
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -4334,6 +4337,15 @@ packages:
       "@types/react":
         optional: true
 
+  use-debounce@10.1.0:
+    resolution:
+      {
+        integrity: sha512-lu87Za35V3n/MyMoEpD5zJv0k7hCn0p+V/fK2kWD+3k2u3kOCwO593UArbczg1fhfs2rqPEnHpULJ3KmGdDzvg==,
+      }
+    engines: { node: ">= 16.0.0" }
+    peerDependencies:
+      react: "*"
+
   use-isomorphic-layout-effect@1.2.1:
     resolution:
       {
@@ -7111,6 +7123,10 @@ snapshots:
       react: 19.2.3
     optionalDependencies:
       "@types/react": 19.2.14
+
+  use-debounce@10.1.0(react@19.2.3):
+    dependencies:
+      react: 19.2.3
 
   use-isomorphic-layout-effect@1.2.1(@types/react@19.2.14)(react@19.2.3):
     dependencies:

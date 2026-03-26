@@ -1,6 +1,5 @@
 "use client";
 
-import { IconSearch } from "@tabler/icons-react";
 import {
   Autocomplete,
   Box,
@@ -9,6 +8,7 @@ import {
   Divider,
   Drawer,
   Group,
+  OptionsFilter,
   ScrollArea,
   Text,
 } from "@mantine/core";
@@ -17,11 +17,17 @@ import { FaGitAlt } from "react-icons/fa";
 import classes from "./styles/Navbar.module.scss";
 import { signIn, signOut } from "../lib/actions/auth-actions";
 import { useContext } from "react";
+import SearchBox from "./search";
+import { GithubUser } from "../lib/github/schemas/user.schema";
+import { GithubUserResult } from "../lib/github/schemas/userResult.schema";
 
 interface NavbarProps {
   showAuth: boolean;
+  showSearch: boolean;
+  query: string;
+  users?: GithubUserResult[];
 }
-export default function Navbar({ showAuth }: NavbarProps) {
+export default function Navbar({ showAuth, showSearch, users }: NavbarProps) {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
@@ -52,6 +58,8 @@ export default function Navbar({ showAuth }: NavbarProps) {
     </Button>
   );
 
+  const searchBox = showSearch ? <SearchBox users={users} /> : <></>;
+
   return (
     <Box
       pb={12}
@@ -74,12 +82,7 @@ export default function Navbar({ showAuth }: NavbarProps) {
             <Text>Git Dash</Text>
           </Group>
 
-          <Autocomplete
-            visibleFrom="sm"
-            placeholder="Search"
-            leftSection={<IconSearch size={16} stroke={1.5} />}
-            mx="md"
-          />
+          {searchBox}
 
           <Group visibleFrom="sm">{loggedInButton}</Group>
 
@@ -104,12 +107,7 @@ export default function Navbar({ showAuth }: NavbarProps) {
         <ScrollArea h="calc(100vh - 80px" mx="-md">
           <Divider my="sm" />
 
-          <Autocomplete
-            placeholder="Search"
-            leftSection={<IconSearch size={16} stroke={1.5} />}
-            mx="md"
-            mb="md"
-          />
+          {searchBox}
 
           <Divider my="sm" />
 
